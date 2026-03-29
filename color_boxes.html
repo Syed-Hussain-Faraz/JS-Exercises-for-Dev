@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Color Boxes Randomly</title>
+        <style>
+            .container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 23px;
+            }
+            .box {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                height: 45px;
+                width: 45px;
+                border: 2px solid black;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="box">Box 1</div>
+            <div class="box">Box 2</div>
+            <div class="box">Box 3</div>
+            <div class="box">Box 4</div>
+            <div class="box">Box 5</div>
+        </div>
+
+        <script>
+            function chooseRandomColor(){
+                const r = Math.floor(Math.random()*256);
+                const g = Math.floor(Math.random()*256);
+                const b = Math.floor(Math.random()*256);
+                return `rgb(${r},${g},${b})`;
+            }
+
+            boxes=document.querySelectorAll(".box");
+
+            boxes.forEach(box => {
+                const textColor = chooseRandomColor();
+                const backColor = chooseRandomColor();
+
+                box.style.color = textColor;
+                box.style.backgroundColor = backColor;
+            });
+        </script>
+    </body>
+</html>
