@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Hacking Terminal</title>
+        <style>
+            body{
+                background-color: rgb(6, 93, 6);
+                border: 20px solid black;
+                padding: 30px;
+                margin: 0px;
+                color: white;
+                font-family: Consolas, Monaco, "Courier New", monospace;
+                font-size: 20px;
+                min-height:100vh;
+            }
+        </style>
+    </head>
+    <body>
+        <div>Initializing hacking</div>
+        <script>
+            async function addItem(text){
+                await timedelay();
+                let d=document.createElement("div");
+                d.innerHTML=text;
+                document.body.appendChild(d);
+            }
+
+            async function timedelay(){
+                return new Promise((resolve,reject)=>{
+                    const delay=1+6*Math.random();
+                    setTimeout(()=>{resolve()},delay*1000);
+                });
+            }
+
+            async function main() {
+                
+                let t=setInterval(()=>{
+                    let last=document.body.getElementsByTagName("div");
+                    lastelem=last[last.length-1];
+                    if(lastelem.innerHTML.endsWith("...")){
+                        lastelem.innerHTML=lastelem.innerHTML.slice(0,lastelem.innerHTML.indexOf("."));
+                    }
+                    else{
+                        lastelem.innerHTML+=".";
+                    }
+                },700);
+
+                const msgs=["Initialized Hacking","Reading files","Confidential information found","Sending all data and personal files to server","Cleaning up"];
+
+                for(let text of msgs){
+                    await addItem(text);
+                    let divs = document.body.getElementsByTagName("div");
+                    if(divs.length > 1){
+                        let prev = divs[divs.length - 2];
+
+                        if(prev.innerHTML.includes(".")){
+                            prev.innerHTML =
+                                prev.innerHTML.slice(0, prev.innerHTML.indexOf("."));
+                        }
+                    }
+                }
+
+                await timedelay();
+                clearInterval(t);
+            }
+
+            main();
+        </script>
+    </body>
+</html>

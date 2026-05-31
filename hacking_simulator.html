@@ -1,0 +1,57 @@
+<!DOCTYPLE html>
+<html>
+    <head>
+        <style>
+            body {
+                background-color: rgb(6, 93, 6);
+                border: 20px solid black;
+                padding: 30px;
+                margin: 0px;
+                color: white;
+                font-family: Consolas, Monaco, "Courier New", monospace;
+                font-size: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <script>
+            function printMsgs(msg){
+                return new Promise((resolve,reject)=>{
+                    var i=0;
+                    const size=msg.length;
+                    const p=document.createElement("p");
+                    document.body.appendChild(p);
+                    const timedelay=1+6*Math.random();
+                    const interval=setInterval(()=>{
+                        if(i<size){
+                            p.innerHTML=msg.slice(0,i)+"█";
+                            i++;
+                        }
+
+                        if(i>=size && i<(size+timedelay)){
+                            p.innerHTML=msg.slice(0,i-1)+".█";
+                            msg=p.innerHTML;
+                            i++;
+                        }
+
+                        if(i>(size+timedelay)){
+                            clearInterval(interval);
+                            p.innerHTML=msg.slice(0,msg.length-1)+"DONE";
+                            resolve();
+                        }
+                    },100);
+                });
+            }
+
+            async function main(){
+                printMsgs("Initializing connection...")
+                .then(()=>printMsgs("Reading files..."))
+                .then(()=>printMsgs("Confidential Information detected..."))
+                .then(()=>printMsgs("Sending all data to server..."))
+                .then(()=>printMsgs("Cleaning up..."));
+            }
+
+            main();
+        </script>
+    </body>
+</html>
